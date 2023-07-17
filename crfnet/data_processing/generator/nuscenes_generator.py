@@ -586,7 +586,7 @@ class NuscenesGenerator(Generator):
         add radar input data to the input batch.
         """
         inputs, targets = super(NuscenesGenerator, self).compute_input_output(group)
-
+        print(inputs, targets)
         if self.radar_input_name:
             # Load radar data
             radar_input_batch = []
