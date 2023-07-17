@@ -97,7 +97,7 @@ class NuscenesGenerator(Generator):
         # Parameters
         self.nusc = nusc
         self.dropout_chance = 0.0
-        self.radar_sensors = ['RADAR_BACK_LEFT']
+        self.radar_sensors = ['RADAR_BACK_RIGHT']
         self.camera_sensors = ['CAM_BACK']
         self.labels = {}
         self.image_data = dict()
