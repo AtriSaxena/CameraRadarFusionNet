@@ -87,7 +87,6 @@ def create_generators(cfg, backbone):
     else:
       scenes = Scenes.default
       
-    print(f"Scenes:{scenes}")
 
     train_generator = NuscenesGenerator(
       nusc,
