@@ -722,6 +722,7 @@ if __name__ == "__main__":
 
         # Get the data
         inputs, targets = data_generator[i]
+        print(inputs, targets)
         img = inputs[0]
         img = preprocess_image_inverted(img)
         ann = data_generator.load_annotations(i)
