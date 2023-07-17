@@ -154,7 +154,7 @@ class NuscenesGenerator(Generator):
         skip_count = 0
 
 
-
+        print(scene_indices)
         # Resolve sample indexing
         if scene_indices is None:
             # We are using all scenes
