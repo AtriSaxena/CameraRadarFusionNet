@@ -161,7 +161,8 @@ class NuscenesGenerator(Generator):
             scene_indices = range(len(nusc.scene))
 
         assert hasattr(scene_indices, '__iter__'), "Iterable object containing sample indices expected"
-
+        print("Scenes indices:")
+        print(scene_indices)
         for scene_index in scene_indices:
             first_sample_token = nusc.scene[scene_index]['first_sample_token']
             nbr_samples = nusc.scene[scene_index]['nbr_samples']
