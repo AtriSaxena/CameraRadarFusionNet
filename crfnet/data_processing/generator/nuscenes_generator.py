@@ -97,8 +97,8 @@ class NuscenesGenerator(Generator):
         # Parameters
         self.nusc = nusc
         self.dropout_chance = 0.0
-        self.radar_sensors = ['RADAR_FRONT']
-        self.camera_sensors = ['CAM_FRONT']
+        self.radar_sensors = ['RADAR_BACK_LEFT']
+        self.camera_sensors = ['CAM_BACK']
         self.labels = {}
         self.image_data = dict()
         self.classes, self.labels = self._get_class_label_mapping([c['name'] for c in nusc.category], category_mapping)
