@@ -167,6 +167,7 @@ if __name__ == '__main__':
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
+    print(generator.size())
     # iterating over all samples in the generator and create the predictions
     for i in progressbar.progressbar(range(generator.size()), prefix='Running network: '):
         if use_multiprocessing:
