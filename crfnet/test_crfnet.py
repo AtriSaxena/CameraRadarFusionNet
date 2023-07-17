@@ -134,8 +134,8 @@ if __name__ == '__main__':
     os.environ['CUDA_VISIBLE_DEVICES'] = cfg.gpu
 
     # create the generators
-    _, _, test_generator, _, _ = create_generators(cfg, backbone)
-    generator = test_generator
+    _, _, _,test_night_generator, _ = create_generators(cfg, backbone)
+    generator = test_night_generator
 
     model = keras.models.load_model(args.model, custom_objects=backbone.custom_objects)
 
