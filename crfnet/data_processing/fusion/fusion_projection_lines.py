@@ -582,7 +582,7 @@ def create_imagep_visualization(image_plus_data, color_channel="distance", \
     image_plus_width = image_plus_data.shape[1]
     n_channels = image_plus_data.shape[2]
     
-    image_plus_data = image_plus_data.numpy() 
+    #image_plus_data = image_plus_data.numpy() 
     radar_plus_image = image_plus_data[175:625, 0:800, 3:]
     all_radar_plus_image = radar_plus_image[:, :, :3]
 
