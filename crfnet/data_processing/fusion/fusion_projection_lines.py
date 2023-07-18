@@ -643,7 +643,8 @@ def create_imagep_visualization(image_plus_data, color_channel="distance", \
     #                 if image_plus_data.shape[0] > y+1 and not np.any(image_plus_data[y+1, x,3:]):
     #                     cv2.circle(image_data, (x,y), 3, color=radar_colormap[(y,x)].astype(np.float), thickness=1)
     image_data = all_radar_plus_image
-    print(cv2.imshow('image',image_data))
+    imgplot = plt.imshow(image_data)
+    plt.show()
     return image_data
 
 
