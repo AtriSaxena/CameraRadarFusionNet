@@ -566,7 +566,7 @@ def imageplus_creation_camra(image_data, radar_data, calibrator, height=(0,3), \
     return image_plus
 
 def create_imagep_visualization(image_plus_data, color_channel="distance", \
-        draw_circles=False, cfg=None, radar_lines_opacity=1.0):
+        draw_circles=True, cfg=None, radar_lines_opacity=1.0):
     """
     Visualization of image plus data
 
@@ -583,71 +583,71 @@ def create_imagep_visualization(image_plus_data, color_channel="distance", \
     image_plus_width = image_plus_data.shape[1]
     n_channels = image_plus_data.shape[2]
     
-    #image_plus_data = image_plus_data.numpy() 
-    radar_plus_image = image_plus_data[175:625, 0:800, 3:]
-    all_radar_plus_image = radar_plus_image[:, :, :3]
-    all_radar_plus_image = np.array(all_radar_plus_image*255).astype(np.uint8)
-    all_radar_plus_image = cv2.cvtColor(all_radar_plus_image, cv2.COLOR_RGB2BGR)
+    # #image_plus_data = image_plus_data.numpy() 
+    # radar_plus_image = image_plus_data[175:625, 0:800, 3:]
+    # all_radar_plus_image = radar_plus_image[:, :, :3]
+    # all_radar_plus_image = np.array(all_radar_plus_image*255).astype(np.uint8)
+    # all_radar_plus_image = cv2.cvtColor(all_radar_plus_image, cv2.COLOR_RGB2BGR)
 
-    # ##### Extract the image Channels #####
-    # if cfg is None:
-    #     image_channels = [0,1,2]
-    # else:
-    #     image_channels = [i_ch for i_ch in cfg.channels if i_ch in [0,1,2]]
-    # image_data = np.ones(shape=(*image_plus_data.shape[:2],3))
-    # if len(image_channels) > 0:
-    #     image_data[:,:,image_channels] = image_plus_data[:,:,image_channels].copy() # copy so we dont change the old image
+    ##### Extract the image Channels #####
+    if cfg is None:
+        image_channels = [0,1,2]
+    else:
+        image_channels = [i_ch for i_ch in cfg.channels if i_ch in [0,1,2]]
+    image_data = np.ones(shape=(*image_plus_data.shape[:2],3))
+    if len(image_channels) > 0:
+        image_data[:,:,image_channels] = image_plus_data[:,:,image_channels].copy() # copy so we dont change the old image
 
-    # # Draw the Horizon
-    # image_data = np.array(image_data*255).astype(np.uint8)
-    # image_data = cv2.cvtColor(image_data, cv2.COLOR_RGB2BGR)
+    # Draw the Horizon
+    image_data = np.array(image_data*255).astype(np.uint8)
+    image_data = cv2.cvtColor(image_data, cv2.COLOR_RGB2BGR)
 
-    # ##### Paint every augmented pixel on the image #####
-    # if n_channels > 3:
-    #     # transfer it to the currently selected channels
-    #     if cfg is None:
-    #         print("Warning, no cfg provided. Thus, its not possible to find out \
-    #             which channel shall be used for colorization")
-    #         radar_img = np.zeros(image_plus_data.shape[:-1]) # we expect the channel index to be the last axis
-    #     else:
-    #         available_channels = {radar.channel_map[ch]:ch_idx for ch_idx, ch in enumerate(cfg.channels) if ch > 2}
-    #         ch_idx = available_channels[color_channel]
-    #         # Normalize the radar
-    #         if cfg.normalize_radar: # normalization happens from -127 to 127
-    #             radar_img = image_plus_data[...,ch_idx] + 127.5
-    #         else:
-    #             radar_img = radar.normalize(color_channel, image_plus_data[..., ch_idx],
-    #                                         normalization_interval=[0, 255], sigma_factor=2)
+    ##### Paint every augmented pixel on the image #####
+    if n_channels > 3:
+        # transfer it to the currently selected channels
+        if cfg is None:
+            print("Warning, no cfg provided. Thus, its not possible to find out \
+                which channel shall be used for colorization")
+            radar_img = np.zeros(image_plus_data.shape[:-1]) # we expect the channel index to be the last axis
+        else:
+            available_channels = {radar.channel_map[ch]:ch_idx for ch_idx, ch in enumerate(cfg.channels) if ch > 2}
+            ch_idx = available_channels[color_channel]
+            # Normalize the radar
+            if cfg.normalize_radar: # normalization happens from -127 to 127
+                radar_img = image_plus_data[...,ch_idx] + 127.5
+            else:
+                radar_img = radar.normalize(color_channel, image_plus_data[..., ch_idx],
+                                            normalization_interval=[0, 255], sigma_factor=2)
 
-    #         radar_img = np.clip(radar_img,0,255)
+            radar_img = np.clip(radar_img,0,255)
 
-    #     radar_colormap = np.array(cv2.applyColorMap(radar_img.astype(np.uint8), cv2.COLORMAP_AUTUMN))
+        radar_colormap = np.array(cv2.applyColorMap(radar_img.astype(np.uint8), cv2.COLORMAP_AUTUMN))
 
-    #     for x in range(0, image_plus_width):
-    #         for y in range(0, image_plus_height):
-    #             radar_channels = image_plus_data[y, x, 3:]
-    #             pixel_contains_radar = np.count_nonzero(radar_channels)
-    #             if not pixel_contains_radar:
-    #                 continue
+        for x in range(0, image_plus_width):
+            for y in range(0, image_plus_height):
+                radar_channels = image_plus_data[y, x, 3:]
+                pixel_contains_radar = np.count_nonzero(radar_channels)
+                if not pixel_contains_radar:
+                    continue
 
-    #             radar_color = radar_colormap[y,x]
-    #             for pixel in [(y,x)]: #[(y,x-1),(y,x),(y,x+1)]:
-    #                 if image_data.shape > pixel:
+                radar_color = radar_colormap[y,x]
+                for pixel in [(y,x)]: #[(y,x-1),(y,x),(y,x+1)]:
+                    if image_data.shape > pixel:
                                 
-    #                     # Calculate the color
-    #                     pixel_color = np.array(image_data[pixel][0:3], dtype=np.uint8)
-    #                     pixel_color = np.squeeze(cv2.addWeighted(pixel_color, 1-radar_lines_opacity, radar_color, radar_lines_opacity, 0))
+                        # Calculate the color
+                        pixel_color = np.array(image_data[pixel][0:3], dtype=np.uint8)
+                        pixel_color = np.squeeze(cv2.addWeighted(pixel_color, 1-radar_lines_opacity, radar_color, radar_lines_opacity, 0))
 
-    #                     # Draw on image
-    #                     #image_data[pixel] = pixel_color
+                        # Draw on image
+                        #image_data[pixel] = pixel_color
                     
-    #             # only if some radar information is there
-    #             if draw_circles:
-    #                 if image_plus_data.shape[0] > y+1 and not np.any(image_plus_data[y+1, x,3:]):
-    #                     cv2.circle(image_data, (x,y), 3, color=radar_colormap[(y,x)].astype(np.float), thickness=1)
-    image_data = all_radar_plus_image
-    imgplot = plt.imshow(image_data)
-    plt.show()
+                # only if some radar information is there
+                if draw_circles:
+                    if image_plus_data.shape[0] > y+1 and not np.any(image_plus_data[y+1, x,3:]):
+                        cv2.circle(image_data, (x,y), 3, color=radar_colormap[(y,x)].astype(np.float), thickness=1)
+    # image_data = all_radar_plus_image
+    # imgplot = plt.imshow(image_data)
+    # plt.show()
     return image_data
 
 
