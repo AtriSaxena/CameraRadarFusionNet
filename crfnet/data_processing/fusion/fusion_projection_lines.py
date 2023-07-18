@@ -17,6 +17,7 @@ import cv2
 import json
 import numpy as np
 from pyquaternion import Quaternion
+import matplotlib.pyplot as plt
 from PIL import Image
 
 # Local modules
