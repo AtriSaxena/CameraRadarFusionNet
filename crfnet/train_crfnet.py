@@ -377,7 +377,7 @@ def main():
         steps_per_epoch=len(train_generator),
         epochs=cfg.epochs,
         validation_data=validation_generator,
-        validation_steps=int(len(validation_generator)*0.1),
+        validation_steps=len(validation_generator),
         verbose=1,
         callbacks=callbacks,
         workers=cfg.workers,
