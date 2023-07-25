@@ -316,7 +316,7 @@ class Generator(keras.utils.Sequence):
         """ Compute inputs and target outputs for the network.
         """
         # load images and annotations
-        print(group)
+        #print(group)
         image_group       = self.load_image_group(group)
         
         if inference:
