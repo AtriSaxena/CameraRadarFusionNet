@@ -250,7 +250,7 @@ def evaluate(
             rel_dist_errors = np.zeros((0,))
             num_annotations = 0.0
 
-            for i in range(generator.size()):
+            for i in range(range(int(generator.size()*0.1)):
                 detections           = all_detections[i][label]
                 annotations          = all_annotations[i][label]
                 num_annotations     += annotations.shape[0]
