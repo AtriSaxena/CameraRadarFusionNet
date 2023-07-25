@@ -78,7 +78,7 @@ def visualize_predictions(predictions, image_data_vis, generator, dist=False, ve
         
         key = generator.label_to_name(labels[0,jk])
         color = class_to_color[key] *255
-        cv2.rectangle(image_data_vis,(x1, y1), (x2, y2), color,2)
+        cv2.rectangle(image_data_vis,(int(x1), int(y1)), (int(x2), int(y2)), color,2)
 
         if dist is not False:
             textLabel = '{0}: {1:3.1f} {2}'.format(key.split('.', 1)[-1], dist[0,jk], 'm')
