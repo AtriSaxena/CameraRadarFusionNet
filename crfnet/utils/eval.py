@@ -88,7 +88,7 @@ def _get_detections(generator, model, distance=False, score_threshold=0.05, max_
         val_generator = enqueuer.get()
     
 
-    for i in progressbar.progressbar(range(generator.size()), prefix='Running network on {} workers: '.format(workers)):
+    for i in progressbar.progressbar(range(int(generator.size()*0.1)), prefix='Running network on {} workers: '.format(workers)):
         if use_multiprocessing:
             inputs, _ = next(val_generator)
         else:
