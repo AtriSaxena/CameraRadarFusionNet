@@ -155,7 +155,7 @@ class NuscenesGenerator(Generator):
 
 
         #print(scene_indices)
-        scene_indices = range(len(nusc.scene))
+        #scene_indices = range(len(nusc.scene))
         # Resolve sample indexing
         if scene_indices is None:
             # We are using all scenes
