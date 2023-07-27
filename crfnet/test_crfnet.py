@@ -183,6 +183,8 @@ if __name__ == '__main__':
         #print(inputs.inputs_1.shape)
         print(inputs.shape)
         print(inputs)
+        with open('test.npy', 'wb') as f:
+            np.save(f, np.array(inputs))
         # run network
         if cfg.distance_detection:
             boxes, scores, labels, dists = prediction_model.predict_on_batch(inputs)
