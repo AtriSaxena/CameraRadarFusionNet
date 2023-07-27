@@ -180,7 +180,9 @@ if __name__ == '__main__':
         if not is_radar_visualization:
             viz_image = viz_image[:,:,:3]
         viz_image = create_imagep_visualization(viz_image, cfg=cfg)
-
+        print(inputs.inputs_1.shape)
+        print(inputs.shape)
+        print(inputs)
         # run network
         if cfg.distance_detection:
             boxes, scores, labels, dists = prediction_model.predict_on_batch(inputs)

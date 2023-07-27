@@ -597,7 +597,7 @@ class NuscenesGenerator(Generator):
                 radar_input_batch.append(radar_array)
 
             radar_input_batch = np.array(radar_input_batch)
-
+            print("Radar input name:"+ self.radar_input_name)
             inputs = {
                 'input_1': inputs,
                 self.radar_input_name: radar_input_batch
