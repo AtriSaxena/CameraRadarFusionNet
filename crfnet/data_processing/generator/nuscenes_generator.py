@@ -430,6 +430,7 @@ class NuscenesGenerator(Generator):
             
             # reduce to requested channels
             #self.channels = [ch - 1 for ch in self.channels] # Shift channels by 1, cause we have a weird convetion starting at 1
+            print(f"org channel:{self.channels}")
             input_data = img_p_full[:,:,self.channels]
 
         else: # We are not in image_plus mode
