@@ -231,7 +231,7 @@ def _radar2camera(image_data, radar_data, radar_xyz_endpoints, clear_radar=False
 
     :return image_plus: a numpy array (900 x 1600 x (3 + number of radar_meta (e.g. velocity)))
     """
-
+    print(f"radar meta:{radar_data.shape[0]}")
     radar_meta_count = radar_data.shape[0]-3
     radar_extension = np.zeros(
         (image_data.shape[0], image_data.shape[1], radar_meta_count), dtype=np.float32)
