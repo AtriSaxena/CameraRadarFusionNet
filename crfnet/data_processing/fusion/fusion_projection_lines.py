@@ -65,7 +65,8 @@ def _radar_transformation(radar_data, height=None):
     :returns radar_data: [numpy array (m x no of points)] that consists of the transformed radar points with z = 0
     :returns radar_xyz_endpoint: [numpy array (3 x no of points)] that consits of the transformed radar points z = height  
     """
-
+    print("radar data:".radar_data)
+    print("height".height)
     # Field of view (global)
     ELEVATION_FOV_SR = 20
     ELEVATION_FOV_FR = 14  
