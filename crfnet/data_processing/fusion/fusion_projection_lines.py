@@ -236,6 +236,7 @@ def _radar2camera(image_data, radar_data, radar_xyz_endpoints, clear_radar=False
     radar_extension = np.zeros(
         (image_data.shape[0], image_data.shape[1], radar_meta_count), dtype=np.float32)
     no_of_points = radar_data.shape[1]
+    print(f"Before Radar ext {radar_extension.shape}")
 
     if clear_radar:
         pass # we just don't add it to the image
@@ -252,9 +253,9 @@ def _radar2camera(image_data, radar_data, radar_xyz_endpoints, clear_radar=False
                 if not np.any(radar_extension[y, x]) or radar_data[-1, radar_point] < radar_extension[y, x, -1]:
                     radar_extension[y, x] = radar_data[3:, radar_point]
 
-
+    print(f"Before Radar ext {radar_extension.shape}")
     image_plus = np.concatenate((image_data, radar_extension), axis=2)
-
+    print(f"image plus shape {image_plus.shape}")
     return image_plus
 
 
