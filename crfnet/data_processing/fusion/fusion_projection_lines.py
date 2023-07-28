@@ -347,7 +347,7 @@ def map_pointcloud_to_image(nusc, radar_points, pointsensor_token, camera_token,
     # intrinsic_resized = np.matmul(camera_resize, np.array(cs_record['camera_intrinsic']))
     view = np.array(cs_record['camera_intrinsic'])
     # Take the actual picture (matrix multiplication with camera-matrix + renormalization).
-    points = view_points(pc.points, view, normalize=True) #resize here
+    points = view_points(pc.points, view, normalize=False) #resize here
 
     # Resizing to target resolution
     if target_resolution[1]: # resizing width
