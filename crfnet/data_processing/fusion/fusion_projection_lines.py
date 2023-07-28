@@ -489,16 +489,19 @@ def imageplus_creation(nusc, image_data, radar_data, pointsensor_token, camera_t
     # Clear the image if clear_image is True
     if clear_image: 
         cur_img.fill(0)
-        
-    print(radar_points.shape)
-    print(radar_xyz_endpoint)    
+    
+    print("before")
+    print(radar_points)
+    #print(radar_xyz_endpoint)    
     #####################################
     ##### Perform the actual Fusion #####
     #####################################
     # Map the radar points into the image
     radar_points = map_pointcloud_to_image(nusc, radar_points, pointsensor_token=pointsensor_token, camera_token=camera_token, target_resolution=image_target_shape)
     radar_xyz_endpoint = map_pointcloud_to_image(nusc, radar_xyz_endpoint, pointsensor_token=pointsensor_token, camera_token=camera_token, target_resolution=image_target_shape)
-    
+    print("After")
+    print(radar_points)
+    print(radar_points.shape)
     if barcode:
         radar_points[1,:] = image_data.shape[0]
         radar_xyz_endpoint[1,:] = 0
