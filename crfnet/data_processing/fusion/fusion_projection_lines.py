@@ -489,7 +489,9 @@ def imageplus_creation(nusc, image_data, radar_data, pointsensor_token, camera_t
     # Clear the image if clear_image is True
     if clear_image: 
         cur_img.fill(0)
-    
+        
+    print(radar_points.shape)
+    print(radar_xyz_endpoint)    
     #####################################
     ##### Perform the actual Fusion #####
     #####################################
