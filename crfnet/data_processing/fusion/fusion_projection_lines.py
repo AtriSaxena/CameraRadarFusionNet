@@ -41,7 +41,7 @@ def _resize_image(image_data, target_shape):
     :return resized image: [np.array] with shape (height x width x 3)
     :return resize matrix: [numpy array (3 x 3)]
     """
-    # print('resized', type(image_data))
+    # #print('resized', type(image_data))
     stupid_confusing_cv2_size_because_width_and_height_are_in_wrong_order = (target_shape[1], target_shape[0])
     resized_image = cv2.resize(image_data, stupid_confusing_cv2_size_because_width_and_height_are_in_wrong_order)
     resize_matrix = np.eye(3, dtype=resized_image.dtype)
@@ -65,8 +65,8 @@ def _radar_transformation(radar_data, height=None):
     :returns radar_data: [numpy array (m x no of points)] that consists of the transformed radar points with z = 0
     :returns radar_xyz_endpoint: [numpy array (3 x no of points)] that consits of the transformed radar points z = height  
     """
-    print(f"radar data:{radar_data}")
-    print(f"height{height}")
+    #print(f"radar data:{radar_data}")
+    #print(f"height{height}")
     # Field of view (global)
     ELEVATION_FOV_SR = 20
     ELEVATION_FOV_FR = 14  
@@ -231,21 +231,21 @@ def _radar2camera(image_data, radar_data, radar_xyz_endpoints, clear_radar=False
 
     :return image_plus: a numpy array (900 x 1600 x (3 + number of radar_meta (e.g. velocity)))
     """
-    print(f"radar meta:{radar_data.shape}")
-    print(f"radar_xyz shape:{radar_xyz_endpoints.shape}")
+    #print(f"radar meta:{radar_data.shape}")
+    #print(f"radar_xyz shape:{radar_xyz_endpoints.shape}")
     radar_meta_count = radar_data.shape[0]-3
     radar_extension = np.zeros(
         (image_data.shape[0], image_data.shape[1], radar_meta_count), dtype=np.float32)
-    print(f"Radar ext shape:{radar_extension.shape}")
+    #print(f"Radar ext shape:{radar_extension.shape}")
     no_of_points = radar_data.shape[1]
-    print(f"Before Radar ext {radar_extension.shape}")
+    #print(f"Before Radar ext {radar_extension.shape}")
 
     if clear_radar:
         pass # we just don't add it to the image
     else:
         for radar_point in range(0, no_of_points):
-            print("-===========================================-")
-            print(radar_data[0:2, radar_point], radar_xyz_endpoints[0:2, radar_point])
+            #print("-===========================================-")
+            #print(radar_data[0:2, radar_point], radar_xyz_endpoints[0:2, radar_point])
             projection_line = _create_vertical_line(
                 radar_data[0:2, radar_point], radar_xyz_endpoints[0:2, radar_point], image_data)
 
@@ -255,12 +255,12 @@ def _radar2camera(image_data, radar_data, radar_xyz_endpoints, clear_radar=False
 
                 # Check if pixel is already filled with radar data and overwrite if distance is less than the existing
                 if not np.any(radar_extension[y, x]) or radar_data[-1, radar_point] < radar_extension[y, x, -1]:
-                    print(f"radar data: {radar_data[3:, radar_point]}")
+                    #print(f"radar data: {radar_data[3:, radar_point]}")
                     radar_extension[y, x] = radar_data[3:, radar_point]
 
-    print(f"Before Radar ext {radar_extension.shape}")
+    #print(f"Before Radar ext {radar_extension.shape}")
     image_plus = np.concatenate((image_data, radar_extension), axis=2)
-    print(f"image plus shape {image_plus.shape}")
+    #print(f"image plus shape {image_plus.shape}")
     return image_plus
 
 
@@ -473,7 +473,7 @@ def imageplus_creation(nusc, image_data, radar_data, pointsensor_token, camera_t
 
         -cur_image: [numpy array] the original, resized image
     """
-    print(f"Radar Shape:{radar_data.shape}")
+    #print(f"Radar Shape:{radar_data.shape}")
     ###############################
     ##### Preprocess the data #####
     ###############################
@@ -496,19 +496,19 @@ def imageplus_creation(nusc, image_data, radar_data, pointsensor_token, camera_t
     if clear_image: 
         cur_img.fill(0)
     
-    print("before")
-    print(radar_points)
-    print(radar_points.shape)
-    #print(radar_xyz_endpoint)    
+    #print("before")
+    #print(radar_points)
+    #print(radar_points.shape)
+    ##print(radar_xyz_endpoint)    
     #####################################
     ##### Perform the actual Fusion #####
     #####################################
     # Map the radar points into the image
     radar_points = map_pointcloud_to_image(nusc, radar_points, pointsensor_token=pointsensor_token, camera_token=camera_token, target_resolution=image_target_shape)
     radar_xyz_endpoint = map_pointcloud_to_image(nusc, radar_xyz_endpoint, pointsensor_token=pointsensor_token, camera_token=camera_token, target_resolution=image_target_shape)
-    print("After")
-    print(radar_points)
-    print(radar_points.shape)
+    #print("After")
+    #print(radar_points)
+    #print(radar_points.shape)
     if barcode:
         radar_points[1,:] = image_data.shape[0]
         radar_xyz_endpoint[1,:] = 0
@@ -521,7 +521,7 @@ def imageplus_creation(nusc, image_data, radar_data, pointsensor_token, camera_t
     #########################
     # Check if clear_image worked
     # if clear_image and np.count_nonzero(image_plus[0:3]):
-    #     print("Clearing image did not work")
+    #     #print("Clearing image did not work")
     
     return image_plus
 
@@ -601,7 +601,7 @@ def create_imagep_visualization(image_plus_data, color_channel="distance", \
     # all_radar_plus_image = radar_plus_image[:, :, :3]
     # all_radar_plus_image = np.array(all_radar_plus_image*255).astype(np.uint8)
     # all_radar_plus_image = cv2.cvtColor(all_radar_plus_image, cv2.COLOR_RGB2BGR)
-    print(f"Configurations:{cfg}")
+    #print(f"Configurations:{cfg}")
     ##### Extract the image Channels #####
     if cfg is None:
         image_channels = [0,1,2]
@@ -619,7 +619,7 @@ def create_imagep_visualization(image_plus_data, color_channel="distance", \
     if n_channels > 3:
         # transfer it to the currently selected channels
         if cfg is None:
-            print("Warning, no cfg provided. Thus, its not possible to find out \
+            #print("Warning, no cfg provided. Thus, its not possible to find out \
                 which channel shall be used for colorization")
             radar_img = np.zeros(image_plus_data.shape[:-1]) # we expect the channel index to be the last axis
         else:
@@ -766,8 +766,8 @@ if __name__ == '__main__':
 #     ego_pose_quat = Quaternion(ego_pose['rotation'])  # 4d vector
 #     ego_pose_rotation = ego_pose_quat.rotation_matrix  # 3x3 matrix
 #     rotation_angles = rotationMatrixToEulerAngles(ego_pose_rotation)
-#     print("Rotation angles in deg:")
-#     print(np.degrees(rotation_angles))
+#     #print("Rotation angles in deg:")
+#     #print(np.degrees(rotation_angles))
 #     rotation_angles[2] = 0
 #     ego_pose_rotation = eulerAnglesToRotationMatrix(rotation_angles)
 
