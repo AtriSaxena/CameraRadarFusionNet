@@ -619,7 +619,7 @@ def create_imagep_visualization(image_plus_data, color_channel="distance", \
     if n_channels > 3:
         # transfer it to the currently selected channels
         if cfg is None:
-            #print("Warning, no cfg provided. Thus, its not possible to find out \
+            print("Warning, no cfg provided. Thus, its not possible to find out \
                 which channel shall be used for colorization")
             radar_img = np.zeros(image_plus_data.shape[:-1]) # we expect the channel index to be the last axis
         else:
