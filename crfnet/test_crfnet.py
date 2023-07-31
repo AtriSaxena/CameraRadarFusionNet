@@ -181,8 +181,8 @@ if __name__ == '__main__':
             viz_image = viz_image[:,:,:3]
         viz_image = create_imagep_visualization(viz_image, cfg=cfg)
         #print(inputs.inputs_1.shape)
-        print(inputs.shape)
-        print(inputs)
+        #print(inputs.shape)
+        #print(inputs)
         with open('test.npy', 'wb') as f:
             np.save(f, np.array(inputs))
         # run network
