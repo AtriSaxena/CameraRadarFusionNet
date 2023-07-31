@@ -244,6 +244,8 @@ def _radar2camera(image_data, radar_data, radar_xyz_endpoints, clear_radar=False
         pass # we just don't add it to the image
     else:
         for radar_point in range(0, no_of_points):
+            print("-===========================================-")
+            print(radar_data[0:2, radar_point], radar_xyz_endpoints[0:2, radar_point])
             projection_line = _create_vertical_line(
                 radar_data[0:2, radar_point], radar_xyz_endpoints[0:2, radar_point], image_data)
 
