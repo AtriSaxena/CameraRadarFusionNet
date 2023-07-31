@@ -468,7 +468,7 @@ def imageplus_creation(nusc, image_data, radar_data, pointsensor_token, camera_t
 
         -cur_image: [numpy array] the original, resized image
     """
-
+    print(f"Radar Shape:{radar_data.shape}")
     ###############################
     ##### Preprocess the data #####
     ###############################
@@ -493,6 +493,7 @@ def imageplus_creation(nusc, image_data, radar_data, pointsensor_token, camera_t
     
     print("before")
     print(radar_points)
+    print(radar_points.shape)
     #print(radar_xyz_endpoint)    
     #####################################
     ##### Perform the actual Fusion #####
