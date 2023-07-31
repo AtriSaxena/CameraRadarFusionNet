@@ -601,7 +601,7 @@ def create_imagep_visualization(image_plus_data, color_channel="distance", \
     # all_radar_plus_image = radar_plus_image[:, :, :3]
     # all_radar_plus_image = np.array(all_radar_plus_image*255).astype(np.uint8)
     # all_radar_plus_image = cv2.cvtColor(all_radar_plus_image, cv2.COLOR_RGB2BGR)
-    print(f"Configurations:{cfg}")
+    print(f"Configurations:{cfg.channels,cfg.normalize_radar}")
     ##### Extract the image Channels #####
     if cfg is None:
         image_channels = [0,1,2]
