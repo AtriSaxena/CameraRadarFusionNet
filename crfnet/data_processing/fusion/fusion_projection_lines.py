@@ -235,6 +235,7 @@ def _radar2camera(image_data, radar_data, radar_xyz_endpoints, clear_radar=False
     radar_meta_count = radar_data.shape[0]-3
     radar_extension = np.zeros(
         (image_data.shape[0], image_data.shape[1], radar_meta_count), dtype=np.float32)
+    print(f"Radar ext shape:{radar_extension.shape}")
     no_of_points = radar_data.shape[1]
     print(f"Before Radar ext {radar_extension.shape}")
 
@@ -251,6 +252,7 @@ def _radar2camera(image_data, radar_data, radar_xyz_endpoints, clear_radar=False
 
                 # Check if pixel is already filled with radar data and overwrite if distance is less than the existing
                 if not np.any(radar_extension[y, x]) or radar_data[-1, radar_point] < radar_extension[y, x, -1]:
+                    print(f"radar data: {radar_data[3:, radar_point]}")
                     radar_extension[y, x] = radar_data[3:, radar_point]
 
     print(f"Before Radar ext {radar_extension.shape}")
