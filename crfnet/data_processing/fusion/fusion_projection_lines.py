@@ -484,6 +484,8 @@ def imageplus_creation(nusc, image_data, radar_data, pointsensor_token, camera_t
         barcode = True
     
     print(f"Radar Data: {radar_data}")
+    with open('radar_data.npy', 'wb') as f:
+            np.save(f, np.array(radar_data))
 
     # Resize the image due to a target shape
     cur_img, camera_resize = _resize_image(image_data, image_target_shape)
