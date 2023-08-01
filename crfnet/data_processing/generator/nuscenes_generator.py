@@ -213,7 +213,7 @@ class NuscenesGenerator(Generator):
       
         # Create the label to class_name mapping
         label_to_name = { label:name for label, name in enumerate(selected_category_names)}
-        print(label_to_name)
+        #print(label_to_name)
         label_to_name[len(label_to_name)] = 'bg' # Add the background class
 
         # Create original class name to label mapping
