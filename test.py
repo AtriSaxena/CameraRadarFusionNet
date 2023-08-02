@@ -27,7 +27,7 @@ num_anchors = AnchorParameters.small.num_anchors()
 
 prediction_model = retinanet_bbox(model=model, anchor_params=anchor_params, class_specific_filter=False)
 
-inputs = np.load('/kaggle/input/sources/input_ti_data_truck.npy')
+inputs = np.load('/kaggle/input/sources/input_ti_data.npy')
 inputs.shape
 
 boxes, scores, labels = prediction_model.predict_on_batch(inputs)[:3]
