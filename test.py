@@ -47,3 +47,4 @@ scores = scores[:,selection]
 labels = labels[:,selection]
 predictions = [boxes, scores, labels] 
 
+print(predictions)
