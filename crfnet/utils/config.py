@@ -55,14 +55,14 @@ def get_config(config_file):
     config = configparser.ConfigParser()
     config.read(config_file)
 
-    commit = str(subprocess.check_output(["git", "rev-parse", "HEAD"]), 'utf-8').strip()
-    branch = str(subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).strip(), 'utf-8').strip()
+    #commit = str(subprocess.check_output(["git", "rev-parse", "HEAD"]), 'utf-8').strip()
+    #branch = str(subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).strip(), 'utf-8').strip()
 
     class Configuation():
         def __init__(self):
             self.runtime = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
-            self.git_commit = commit
-            self.git_branch = branch
+            #self.git_commit = commit
+            #self.git_branch = branch
             self.save_model = config['PATH']['save_model']
             self.load_model = config['PATH']['load_model']
             self.tensorboard = config.getboolean('TENSORBOARD', 'tensorboard')
