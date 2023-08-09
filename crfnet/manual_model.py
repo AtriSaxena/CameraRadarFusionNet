@@ -332,9 +332,15 @@ def main():
     
     model.load_weights('/kaggle/working/CameraRadarFusionNet/crfnet/saved_models/crf_net_10.h5', by_name=True)
     
-    model.save('/kaggle/working/CameraRadarFusionNet/crfnet/saved_models/new_model/', save_format='tf')
+    model.save('/kaggle/working/CameraRadarFusionNet/crfnet/saved_models/new_model.keras')
     
 
+    with tf.keras.backend.get_session() as sess:
+        sess.run(tf.global_variables_initializer())    
+        converter = tf.lite.TFLiteConverter.from_session(sess, model.inputs, model.outputs)
+        tflite_model = converter.convert()
+        with open("model.tflite", "wb") as f:
+            f.write(tflite_model) 
     # # this lets the generator compute backbone layer shapes using the actual backbone model
     # if 'vgg' in cfg.network or 'densenet' in cfg.network:
     #     train_generator.compute_shapes = make_shapes_callback(model)
