@@ -335,6 +335,7 @@ def main():
     model.save('/kaggle/working/CameraRadarFusionNet/crfnet/saved_models/new_model.keras')
     
     with tf.keras.backend.get_session() as sess:
+        sess.run(tf.global_variables_initializer())
         tf.saved_model.simple_save(sess, "crfnet_model", inputs={'input_1': model.input},outputs={t.name:t for t in model.outputs})
     
     
