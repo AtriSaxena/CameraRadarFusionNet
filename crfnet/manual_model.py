@@ -330,6 +330,10 @@ def main():
     print(model.summary())
     print("Model Parameters: ", model.count_params())
     
+    model.load_weights('/kaggle/working/CameraRadarFusionNet/crfnet/saved_models/crf_net_10.h5', by_name=True)
+    
+    model.save('/kaggle/working/CameraRadarFusionNet/crfnet/saved_models/new_model/', save_format='tf')
+    
 
     # # this lets the generator compute backbone layer shapes using the actual backbone model
     # if 'vgg' in cfg.network or 'densenet' in cfg.network:
