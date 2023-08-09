@@ -334,7 +334,7 @@ def main():
     
     model.save('/kaggle/working/CameraRadarFusionNet/crfnet/saved_models/new_model.keras')
     
-    tf.saved_model.save(model, "tmp_model")
+    tf.saved_model.simple_save(model, "tmp_model")
     
     
     converter = tf.lite.TFLiteConverter.from_keras_model(model)
