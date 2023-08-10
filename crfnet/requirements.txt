@@ -1,6 +1,6 @@
 setuptools
 numpy>=1.16.0
-tensorflow-gpu==1.13.* 
+tensorflow-gpu==1.15.* 
 tensorflow-serving-api-gpu==1.13.* 
 opencv-python==3.* 
 keras==2.2.4
