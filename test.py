@@ -27,24 +27,28 @@ num_anchors = AnchorParameters.small.num_anchors()
 
 prediction_model = retinanet_bbox(model=model, anchor_params=anchor_params, class_specific_filter=False)
 
-inputs = np.load('/kaggle/input/sources/input_ti_data_04_08.npy')
-inputs.shape
+with tf.keras.backend.get_session() as sess:
+    sess.run(tf.global_variables_initializer())
+    tf.saved_model.simple_save(sess, "crfnet_model", inputs={'input_1': prediction_model.input},outputs={t.name:t for t in prediction_model.outputs})
 
-boxes, scores, labels = prediction_model.predict_on_batch(inputs)[:3]
+# inputs = np.load('/kaggle/input/sources/input_ti_data_04_08.npy')
+# inputs.shape
 
-with open('boxes.npy','wb') as f:
-    np.save(f, boxes)
+# boxes, scores, labels = prediction_model.predict_on_batch(inputs)[:3]
+
+# with open('boxes.npy','wb') as f:
+#     np.save(f, boxes)
     
-with open('scores.npy','wb') as f:
-    np.save(f, scores)
+# with open('scores.npy','wb') as f:
+#     np.save(f, scores)
     
-with open('labels.npy','wb') as f:
-    np.save(f, labels)
+# with open('labels.npy','wb') as f:
+#     np.save(f, labels)
 
-selection = np.where(scores > 0.4)[1]
-boxes = boxes[:,selection,:]
-scores = scores[:,selection]
-labels = labels[:,selection]
-predictions = [boxes, scores, labels] 
+# selection = np.where(scores > 0.4)[1]
+# boxes = boxes[:,selection,:]
+# scores = scores[:,selection]
+# labels = labels[:,selection]
+# predictions = [boxes, scores, labels] 
 
-print(predictions)
+# print(predictions)
